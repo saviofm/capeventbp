@@ -14,19 +14,9 @@ modules:
     build-result: resources
     requires:
     - artifacts:
-      - capeventbpappenvirodash.zip
-      name: capeventbpappenvirodash
+      - capeventbpappeventlog.zip
+      name: capeventbpappeventlog
       target-path: resources/
-
-- name: capeventbpappenvirodash
-  type: html5
-  path: app/envirodash
-  build-parameters:
-    build-result: dist
-    builder: custom
-    commands:
-    - npm run build:cf
-    supported-platforms: []
 - name: capeventbp-destination-content
   type: com.sap.application.content
   path: .
@@ -87,7 +77,16 @@ modules:
   - name: capeventbp-xsuaa-service
   parameters:
     buildpack: nodejs_buildpack
-
+- name: capeventbpappeventlog
+  type: html5
+  path: app/eventlog
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
 resources:
 - name: capeventbp-db
   type: com.sap.xs.hdi-container

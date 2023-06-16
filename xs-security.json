@@ -6,11 +6,11 @@
     "scopes": [ 
       {
         "name": "$XSAPPNAME.capeventbp_admin",
-        "description": "SAP XP SP admin"
+        "description": "CAP Event BP admin"
       },  
       {
         "name": "$XSAPPNAME.capeventbp_suser",
-        "description": "SAP XP SP suser"
+        "description": "CAP Event BP suser"
       },       
       {
         "name": "uaa.user",
@@ -32,7 +32,7 @@
     "role-templates": [      
       {
         "name": "capeventbp_admin",
-        "description": "SAP XP SP Administrator",
+        "description": "CAP Event BP Administrator",
         "scope-references": [
             "$XSAPPNAME.capeventbp_admin"
         ],
@@ -40,7 +40,7 @@
       },  
       {
         "name": "capeventbp_suser",
-        "description": "SAP XP SP Super User",
+        "description": "CAP Event BP Super User",
         "scope-references": [
             "$XSAPPNAME.capeventbp_suser"
         ],
@@ -48,7 +48,7 @@
       },     
       {
         "name": "capeventbp_foreigncall",
-        "description": "SAP XP SP Call",
+        "description": "CAP Event BP Call",
         "scope-references": [
             "$XSAPPNAME.capeventbp_foreigncall"
         ],
@@ -64,15 +64,15 @@
     ],
     "role-collections": [
       {
-        "name": "SAP_XP_SP_admin",
-        "description": "SAP XP SP Admin Role Collection",
+        "name": "capeventbp_admin",
+        "description": "CAP Event BP Admin Role Collection",
         "role-template-references": [
           "$XSAPPNAME.capeventbp_admin"
         ]
       },
       {
-        "name": "SAP_XP_SP_suser",
-        "description": "SAP XP SP Super User Role Collection",
+        "name": "capeventbp_suser",
+        "description": "CAP Event bp Super User Role Collection",
         "role-template-references": [
           "$XSAPPNAME.capeventbp_suser"
         ]

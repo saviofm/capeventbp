@@ -3,7 +3,7 @@ using CatalogService from './cat-service';
 //----------------- IOT Ambiental  ---------------------//
 //------------------------------------------------------//
 //------------------------------------------------------//
-annotate CatalogService.ambientalIOT with @( 
+annotate CatalogService.eventBPCreated with @( 
    	UI: {
         HeaderInfo: {          
             Title : { 
