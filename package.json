@@ -1,0 +1,127 @@
+{
+    "name": "capeventbp",
+    "version": "1.0.0",
+    "description": "SAP XP Snpm ão Paulo",
+    "repository": "",
+    "license": "UNLICENSED",
+    "private": true,
+    "dependencies": {
+        "@sap-cloud-sdk/http-client": "^2.12.1",
+        "@sap/cds": "6.3.2",
+        "@sap/cds-dk": "6.3.2",
+        "@sap/cds-odata-v2-adapter-proxy": "1.9.16",
+        "@sap/hana-client": "^2.14.22",
+        "@sap/jobs-client": "^1.7.42",
+        "@sap/textbundle": "4.1.0",
+        "@sap/xb-msg-amqp-v100": "latest",
+        "@sap/xsenv": "3.4.0",
+        "@sap/xssec": "3.2.14",
+        "@types/node-fetch": "^2.6.1",
+        "cds-swagger-ui-express": "^0.5.0",
+        "cors": "^2.8.5",
+        "express": "^4",
+        "hdb": "0.19.5",
+        "https": "^1.0.0",
+        "passport": "0.6.0",
+        "perf_hooks": "^0.0.1"
+    },
+    "devDependencies": {
+        "@sap/cds-compiler": "3.4.4",
+        "@sap/eslint-plugin-cds": "2.3.3",
+        "@sap/eslint-plugin-ui5-jsdocs": "^2.0.5",
+        "@sap/hdi-deploy": "4.4.1",
+        "@sap/ux-specification": "^1.108.7",
+        "@sap/ux-ui5-tooling": "^1.5.5",
+        "@sapui5/ts-types": "^1.92.2",
+        "eslint": "^7.32.0",
+        "rimraf": "^3.0.2"
+    },
+    "engines": {
+        "node": "16.x.x",
+        "npm": "8.x.x"
+    },
+    "scripts": {
+        "start": "cds run",
+        "undeploy": "cf undeploy capeventbp --delete-services --delete-service-keys --delete-service-brokers",
+        "watch-createform": "cds watch --open createform/webapp/index.html?sap-ui-xx-viewCache=false",
+        "watch-ambientaldash": "cds watch --open ambientaldash/webapp/index.html?sap-ui-xx-viewCache=false",
+        "watch-envirodash": "cds watch --open envirodash/webapp/index.html?sap-ui-xx-viewCache=false",
+        "watch-project1": "cds watch --open project1/webapp/index.html?sap-ui-xx-viewCache=false",
+        "build": "rimraf resources mta_archives && mbt build --mtar archive",
+        "deploy": "cf deploy mta_archives/archive.mtar --retries 1"
+    },
+    "eslintConfig": {
+        "extends": "eslint:recommended",
+        "env": {
+            "es2020": true,
+            "node": true,
+            "jest": true,
+            "mocha": true
+        },
+        "globals": {
+            "SELECT": true,
+            "INSERT": true,
+            "UPDATE": true,
+            "DELETE": true,
+            "CREATE": true,
+            "DROP": true,
+            "CDL": true,
+            "CQL": true,
+            "CXL": true,
+            "cds": true
+        },
+        "rules": {
+            "no-console": "off",
+            "require-atomic-updates": "off"
+        }
+    },
+    "cds": {
+        "i18n": {
+            "folders": [
+                "_i18n",
+                "i18n"
+            ]
+        },
+        "requires": {
+            "db": {
+                "model": [
+                    "db",
+                    "srv"
+                ],
+                "kind": "hana",
+                "pool": {
+                    "acquireTimeoutMillis": 600000,
+                    "min": 0,
+                    "max": 600000
+                }
+            },
+            "xsuaa_api": {
+                "kind": "rest",
+                "credentials": {
+                    "url": "<from XSUAA service binding>",
+                    "forwardAuthToken": true
+                }
+            },
+            "uaa": {
+                "kind": "xsuaa"
+            },
+            "messaging": {
+                "kind": "enterprise-messaging"
+            },
+            "bpCreated": {
+                "kind": "enterprise-messaging-shared",
+                "queue": {
+                    "name": "sappsbr/eventmesh/us10/businesspartner/created",
+                    "accessType": "NON_EXCLUSIVE",
+                    "maxMessageSizeInBytes": 19000000
+                }
+            }
+        },
+        "hana": {
+            "deploy-format": "hdbtable"
+        }
+    },
+    "sapux": [
+        "app/envirodash"
+    ]
+}

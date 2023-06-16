@@ -1,0 +1,2141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Common.xml" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Alias="Common" Namespace="com.sap.vocabularies.Common.v1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Communication.xml" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Alias="Communication" Namespace="com.sap.vocabularies.Communication.v1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.xml" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Alias="Core" Namespace="Org.OData.Core.V1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/UI.xml" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Alias="UI" Namespace="com.sap.vocabularies.UI.v1"/>
+    </edmx:Reference>
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema Namespace="CatalogService" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+            <EntityContainer Name="EntityContainer" m:IsDefaultEntityContainer="true">
+                <EntitySet Name="Opportunity" EntityType="CatalogService.Opportunity"/>
+                <EntitySet Name="ScheduleStatus" EntityType="CatalogService.ScheduleStatus"/>
+                <EntitySet Name="Demo" EntityType="CatalogService.Demo"/>
+                <FunctionImport Name="Demo_draftPrepare" EntitySet="Demo" ReturnType="CatalogService.Demo" m:HttpMethod="POST" sap:action-for="CatalogService.Demo">
+                    <Parameter Name="ID" Type="Edm.Guid" Nullable="false" Mode="In"/>
+                    <Parameter Name="IsActiveEntity" Type="Edm.Boolean" Nullable="false" Mode="In"/>
+                    <Parameter Name="SideEffectsQualifier" Type="Edm.String" Mode="In" Nullable="true"/>
+                </FunctionImport>
+                <FunctionImport Name="Demo_draftActivate" EntitySet="Demo" ReturnType="CatalogService.Demo" m:HttpMethod="POST" sap:action-for="CatalogService.Demo">
+                    <Parameter Name="ID" Type="Edm.Guid" Nullable="false" Mode="In"/>
+                    <Parameter Name="IsActiveEntity" Type="Edm.Boolean" Nullable="false" Mode="In"/>
+                </FunctionImport>
+                <FunctionImport Name="Demo_draftEdit" EntitySet="Demo" ReturnType="CatalogService.Demo" m:HttpMethod="POST" sap:action-for="CatalogService.Demo">
+                    <Parameter Name="ID" Type="Edm.Guid" Nullable="false" Mode="In"/>
+                    <Parameter Name="IsActiveEntity" Type="Edm.Boolean" Nullable="false" Mode="In"/>
+                    <Parameter Name="PreserveChanges" Type="Edm.Boolean" Mode="In" Nullable="true"/>
+                </FunctionImport>
+                <EntitySet Name="Schedule" EntityType="CatalogService.Schedule"/>
+                <FunctionImport Name="Schedule_draftPrepare" EntitySet="Schedule" ReturnType="CatalogService.Schedule" m:HttpMethod="POST" sap:action-for="CatalogService.Schedule">
+                    <Parameter Name="ID" Type="Edm.Guid" Nullable="false" Mode="In"/>
+                    <Parameter Name="IsActiveEntity" Type="Edm.Boolean" Nullable="false" Mode="In"/>
+                    <Parameter Name="SideEffectsQualifier" Type="Edm.String" Mode="In" Nullable="true"/>
+                </FunctionImport>
+                <FunctionImport Name="Schedule_draftActivate" EntitySet="Schedule" ReturnType="CatalogService.Schedule" m:HttpMethod="POST" sap:action-for="CatalogService.Schedule">
+                    <Parameter Name="ID" Type="Edm.Guid" Nullable="false" Mode="In"/>
+                    <Parameter Name="IsActiveEntity" Type="Edm.Boolean" Nullable="false" Mode="In"/>
+                </FunctionImport>
+                <FunctionImport Name="Schedule_draftEdit" EntitySet="Schedule" ReturnType="CatalogService.Schedule" m:HttpMethod="POST" sap:action-for="CatalogService.Schedule">
+                    <Parameter Name="ID" Type="Edm.Guid" Nullable="false" Mode="In"/>
+                    <Parameter Name="IsActiveEntity" Type="Edm.Boolean" Nullable="false" Mode="In"/>
+                    <Parameter Name="PreserveChanges" Type="Edm.Boolean" Mode="In" Nullable="true"/>
+                </FunctionImport>
+                <EntitySet Name="ScheduleInvited" EntityType="CatalogService.ScheduleInvited"/>
+                <FunctionImport Name="ScheduleInvited_draftPrepare" EntitySet="ScheduleInvited" ReturnType="CatalogService.ScheduleInvited" m:HttpMethod="POST" sap:action-for="CatalogService.ScheduleInvited">
+                    <Parameter Name="ID" Type="Edm.Guid" Nullable="false" Mode="In"/>
+                    <Parameter Name="IsActiveEntity" Type="Edm.Boolean" Nullable="false" Mode="In"/>
+                    <Parameter Name="SideEffectsQualifier" Type="Edm.String" Mode="In" Nullable="true"/>
+                </FunctionImport>
+                <EntitySet Name="ScheduleDemo" EntityType="CatalogService.ScheduleDemo"/>
+                <FunctionImport Name="ScheduleDemo_draftPrepare" EntitySet="ScheduleDemo" ReturnType="CatalogService.ScheduleDemo" m:HttpMethod="POST" sap:action-for="CatalogService.ScheduleDemo">
+                    <Parameter Name="ID" Type="Edm.Guid" Nullable="false" Mode="In"/>
+                    <Parameter Name="IsActiveEntity" Type="Edm.Boolean" Nullable="false" Mode="In"/>
+                    <Parameter Name="SideEffectsQualifier" Type="Edm.String" Mode="In" Nullable="true"/>
+                </FunctionImport>
+                <EntitySet Name="ScheduleCreate" EntityType="CatalogService.ScheduleCreate"/>
+                <EntitySet Name="ScheduleCreateInvited" EntityType="CatalogService.ScheduleCreateInvited"/>
+                <EntitySet Name="ScheduleCreateDemo" EntityType="CatalogService.ScheduleCreateDemo"/>
+                <EntitySet Name="DemoCreate" EntityType="CatalogService.DemoCreate"/>
+                <EntitySet Name="DraftAdministrativeData" EntityType="CatalogService.DraftAdministrativeData"/>
+                <EntitySet Name="ScheduleStatus_texts" EntityType="CatalogService.ScheduleStatus_texts"/>
+                <AssociationSet Name="ScheduleStatus_texts_1" Association="CatalogService.ScheduleStatus_texts_1">
+                    <End Role="ScheduleStatus" EntitySet="ScheduleStatus"/>
+                    <End Role="ScheduleStatus_texts" EntitySet="ScheduleStatus_texts"/>
+                </AssociationSet>
+                <AssociationSet Name="ScheduleStatus_localized" Association="CatalogService.ScheduleStatus_localized">
+                    <End Role="ScheduleStatus" EntitySet="ScheduleStatus"/>
+                    <End Role="ScheduleStatus_texts" EntitySet="ScheduleStatus_texts"/>
+                </AssociationSet>
+                <AssociationSet Name="Demo_DraftAdministrativeData" Association="CatalogService.Demo_DraftAdministrativeData">
+                    <End Role="Demo" EntitySet="Demo"/>
+                    <End Role="DraftAdministrativeData" EntitySet="DraftAdministrativeData"/>
+                </AssociationSet>
+                <AssociationSet Name="Demo_SiblingEntity" Association="CatalogService.Demo_SiblingEntity">
+                    <End Role="Demo" EntitySet="Demo"/>
+                    <End Role="Demo1" EntitySet="Demo"/>
+                </AssociationSet>
+                <AssociationSet Name="Schedule_opportunity" Association="CatalogService.Schedule_opportunity">
+                    <End Role="Schedule" EntitySet="Schedule"/>
+                    <End Role="Opportunity" EntitySet="Opportunity"/>
+                </AssociationSet>
+                <AssociationSet Name="Schedule_scheduleStatus" Association="CatalogService.Schedule_scheduleStatus">
+                    <End Role="Schedule" EntitySet="Schedule"/>
+                    <End Role="ScheduleStatus" EntitySet="ScheduleStatus"/>
+                </AssociationSet>
+                <AssociationSet Name="Schedule_DraftAdministrativeData" Association="CatalogService.Schedule_DraftAdministrativeData">
+                    <End Role="Schedule" EntitySet="Schedule"/>
+                    <End Role="DraftAdministrativeData" EntitySet="DraftAdministrativeData"/>
+                </AssociationSet>
+                <AssociationSet Name="Schedule_SiblingEntity" Association="CatalogService.Schedule_SiblingEntity">
+                    <End Role="Schedule" EntitySet="Schedule"/>
+                    <End Role="Schedule1" EntitySet="Schedule"/>
+                </AssociationSet>
+                <AssociationSet Name="ScheduleInvited_schedule" Association="CatalogService.ScheduleInvited_schedule">
+                    <End Role="ScheduleInvited" EntitySet="ScheduleInvited"/>
+                    <End Role="Schedule" EntitySet="Schedule"/>
+                </AssociationSet>
+                <AssociationSet Name="ScheduleInvited_DraftAdministrativeData" Association="CatalogService.ScheduleInvited_DraftAdministrativeData">
+                    <End Role="ScheduleInvited" EntitySet="ScheduleInvited"/>
+                    <End Role="DraftAdministrativeData" EntitySet="DraftAdministrativeData"/>
+                </AssociationSet>
+                <AssociationSet Name="ScheduleInvited_SiblingEntity" Association="CatalogService.ScheduleInvited_SiblingEntity">
+                    <End Role="ScheduleInvited" EntitySet="ScheduleInvited"/>
+                    <End Role="ScheduleInvited1" EntitySet="ScheduleInvited"/>
+                </AssociationSet>
+                <AssociationSet Name="ScheduleDemo_schedule" Association="CatalogService.ScheduleDemo_schedule">
+                    <End Role="ScheduleDemo" EntitySet="ScheduleDemo"/>
+                    <End Role="Schedule" EntitySet="Schedule"/>
+                </AssociationSet>
+                <AssociationSet Name="ScheduleDemo_demo" Association="CatalogService.ScheduleDemo_demo">
+                    <End Role="ScheduleDemo" EntitySet="ScheduleDemo"/>
+                    <End Role="Demo" EntitySet="Demo"/>
+                </AssociationSet>
+                <AssociationSet Name="ScheduleDemo_DraftAdministrativeData" Association="CatalogService.ScheduleDemo_DraftAdministrativeData">
+                    <End Role="ScheduleDemo" EntitySet="ScheduleDemo"/>
+                    <End Role="DraftAdministrativeData" EntitySet="DraftAdministrativeData"/>
+                </AssociationSet>
+                <AssociationSet Name="ScheduleDemo_SiblingEntity" Association="CatalogService.ScheduleDemo_SiblingEntity">
+                    <End Role="ScheduleDemo" EntitySet="ScheduleDemo"/>
+                    <End Role="ScheduleDemo1" EntitySet="ScheduleDemo"/>
+                </AssociationSet>
+                <AssociationSet Name="ScheduleCreate_opportunity" Association="CatalogService.ScheduleCreate_opportunity">
+                    <End Role="ScheduleCreate" EntitySet="ScheduleCreate"/>
+                    <End Role="Opportunity" EntitySet="Opportunity"/>
+                </AssociationSet>
+                <AssociationSet Name="ScheduleCreate_scheduleStatus" Association="CatalogService.ScheduleCreate_scheduleStatus">
+                    <End Role="ScheduleCreate" EntitySet="ScheduleCreate"/>
+                    <End Role="ScheduleStatus" EntitySet="ScheduleStatus"/>
+                </AssociationSet>
+                <AssociationSet Name="ScheduleCreateInvited_schedule" Association="CatalogService.ScheduleCreateInvited_schedule">
+                    <End Role="ScheduleCreateInvited" EntitySet="ScheduleCreateInvited"/>
+                    <End Role="ScheduleCreate" EntitySet="ScheduleCreate"/>
+                </AssociationSet>
+                <AssociationSet Name="ScheduleCreateDemo_schedule" Association="CatalogService.ScheduleCreateDemo_schedule">
+                    <End Role="ScheduleCreateDemo" EntitySet="ScheduleCreateDemo"/>
+                    <End Role="ScheduleCreate" EntitySet="ScheduleCreate"/>
+                </AssociationSet>
+                <AssociationSet Name="ScheduleCreateDemo_demo" Association="CatalogService.ScheduleCreateDemo_demo">
+                    <End Role="ScheduleCreateDemo" EntitySet="ScheduleCreateDemo"/>
+                    <End Role="DemoCreate" EntitySet="DemoCreate"/>
+                </AssociationSet>
+            </EntityContainer>
+            <EntityType Name="Opportunity">
+                <Key>
+                    <PropertyRef Name="oppId"/>
+                </Key>
+                <Property Name="oppId" Type="Edm.String" MaxLength="70" Nullable="false"/>
+                <Property Name="oppDescription" Type="Edm.String" MaxLength="255"/>
+                <Property Name="dealSize" Type="Edm.String" MaxLength="20"/>
+                <Property Name="accountOwner" Type="Edm.String" MaxLength="255"/>
+                <Property Name="companyName" Type="Edm.String" MaxLength="255"/>
+                <Property Name="amount" Type="Edm.String" MaxLength="50"/>
+                <Property Name="quarter" Type="Edm.String" MaxLength="8"/>
+                <Property Name="fcCategory" Type="Edm.String" MaxLength="70"/>
+                <Property Name="oppPhase" Type="Edm.String" MaxLength="20"/>
+                <Property Name="opportunityOwner" Type="Edm.String" MaxLength="255"/>
+                <Property Name="salesOffice" Type="Edm.String" MaxLength="70"/>
+                <Property Name="channelPartner" Type="Edm.String" MaxLength="255"/>
+                <Property Name="channelPartnerID" Type="Edm.String" MaxLength="10"/>
+                <Property Name="onPremCloud" Type="Edm.String" MaxLength="20"/>
+                <Property Name="marketBasket" Type="Edm.String" MaxLength="60"/>
+                <Property Name="errorFlag" Type="Edm.String" MaxLength="20"/>
+                <Property Name="dealType" Type="Edm.String" MaxLength="20"/>
+                <Property Name="overallFCReliability" Type="Edm.String" MaxLength="10"/>
+                <Property Name="dealScored" Type="Edm.String" MaxLength="20"/>
+                <Property Name="fcHygieneIndex" Type="Edm.String" MaxLength="10"/>
+                <Property Name="totalOpportunityCost" Type="Edm.String" MaxLength="20"/>
+                <Property Name="presalesLeadComments" Type="Edm.String"/>
+            </EntityType>
+            <EntityType Name="ScheduleStatus">
+                <Key>
+                    <PropertyRef Name="scheduleStatus"/>
+                </Key>
+                <Property Name="scheduleStatus" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="txtScheduleStatus" Type="Edm.String"/>
+                <NavigationProperty Name="texts" Relationship="CatalogService.ScheduleStatus_texts_1" FromRole="ScheduleStatus" ToRole="ScheduleStatus_texts"/>
+                <NavigationProperty Name="localized" Relationship="CatalogService.ScheduleStatus_localized" FromRole="ScheduleStatus" ToRole="ScheduleStatus_texts"/>
+            </EntityType>
+            <EntityType Name="Demo" m:HasStream="true">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                    <PropertyRef Name="IsActiveEntity"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="createdAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="createdBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="modifiedAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="modifiedBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="demoName" Type="Edm.String"/>
+                <Property Name="demoDescription" Type="Edm.String"/>
+                <Property Name="demoExperience" Type="Edm.String"/>
+                <Property Name="demoObs" Type="Edm.String"/>
+                <Property Name="demoStatus" Type="Edm.String"/>
+                <Property Name="videoURLEN" Type="Edm.String"/>
+                <Property Name="videoURLPT" Type="Edm.String"/>
+                <Property Name="IsActiveEntity" Type="Edm.Boolean" Nullable="false"/>
+                <Property Name="HasActiveEntity" Type="Edm.Boolean" Nullable="false"/>
+                <Property Name="HasDraftEntity" Type="Edm.Boolean" Nullable="false"/>
+                <NavigationProperty Name="DraftAdministrativeData" Relationship="CatalogService.Demo_DraftAdministrativeData" FromRole="Demo" ToRole="DraftAdministrativeData"/>
+                <Property Name="DraftAdministrativeData_DraftUUID" Type="Edm.Guid"/>
+                <NavigationProperty Name="SiblingEntity" Relationship="CatalogService.Demo_SiblingEntity" FromRole="Demo" ToRole="Demo1"/>
+            </EntityType>
+            <EntityType Name="Schedule">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                    <PropertyRef Name="IsActiveEntity"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="createdAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="createdBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="modifiedAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="modifiedBy" Type="Edm.String" MaxLength="255"/>
+                <NavigationProperty Name="opportunity" Relationship="CatalogService.Schedule_opportunity" FromRole="Schedule" ToRole="Opportunity"/>
+                <Property Name="opportunity_oppId" Type="Edm.String" MaxLength="70"/>
+                <Property Name="mainContact" Type="Edm.String"/>
+                <Property Name="mail" Type="Edm.String"/>
+                <Property Name="phoneNumber" Type="Edm.String"/>
+                <Property Name="desiredDate" Type="Edm.DateTime" sap:display-format="Date"/>
+                <NavigationProperty Name="invitedList" Relationship="CatalogService.ScheduleInvited_schedule" FromRole="Schedule" ToRole="ScheduleInvited"/>
+                <NavigationProperty Name="demos" Relationship="CatalogService.ScheduleDemo_schedule" FromRole="Schedule" ToRole="ScheduleDemo"/>
+                <Property Name="scheduleObs" Type="Edm.String"/>
+                <NavigationProperty Name="scheduleStatus" Relationship="CatalogService.Schedule_scheduleStatus" FromRole="Schedule" ToRole="ScheduleStatus"/>
+                <Property Name="scheduleStatus_scheduleStatus" Type="Edm.Int32"/>
+                <Property Name="IsActiveEntity" Type="Edm.Boolean" Nullable="false"/>
+                <Property Name="HasActiveEntity" Type="Edm.Boolean" Nullable="false"/>
+                <Property Name="HasDraftEntity" Type="Edm.Boolean" Nullable="false"/>
+                <NavigationProperty Name="DraftAdministrativeData" Relationship="CatalogService.Schedule_DraftAdministrativeData" FromRole="Schedule" ToRole="DraftAdministrativeData"/>
+                <Property Name="DraftAdministrativeData_DraftUUID" Type="Edm.Guid"/>
+                <NavigationProperty Name="SiblingEntity" Relationship="CatalogService.Schedule_SiblingEntity" FromRole="Schedule" ToRole="Schedule1"/>
+            </EntityType>
+            <EntityType Name="ScheduleInvited">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                    <PropertyRef Name="IsActiveEntity"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="createdAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="createdBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="modifiedAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="modifiedBy" Type="Edm.String" MaxLength="255"/>
+                <NavigationProperty Name="schedule" Relationship="CatalogService.ScheduleInvited_schedule" FromRole="ScheduleInvited" ToRole="Schedule"/>
+                <Property Name="schedule_ID" Type="Edm.Guid"/>
+                <Property Name="invitedName" Type="Edm.String"/>
+                <Property Name="invitedEmail" Type="Edm.String"/>
+                <Property Name="IsActiveEntity" Type="Edm.Boolean" Nullable="false"/>
+                <Property Name="HasActiveEntity" Type="Edm.Boolean" Nullable="false"/>
+                <Property Name="HasDraftEntity" Type="Edm.Boolean" Nullable="false"/>
+                <NavigationProperty Name="DraftAdministrativeData" Relationship="CatalogService.ScheduleInvited_DraftAdministrativeData" FromRole="ScheduleInvited" ToRole="DraftAdministrativeData"/>
+                <Property Name="DraftAdministrativeData_DraftUUID" Type="Edm.Guid"/>
+                <NavigationProperty Name="SiblingEntity" Relationship="CatalogService.ScheduleInvited_SiblingEntity" FromRole="ScheduleInvited" ToRole="ScheduleInvited1"/>
+            </EntityType>
+            <EntityType Name="ScheduleDemo">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                    <PropertyRef Name="IsActiveEntity"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <NavigationProperty Name="schedule" Relationship="CatalogService.ScheduleDemo_schedule" FromRole="ScheduleDemo" ToRole="Schedule"/>
+                <Property Name="schedule_ID" Type="Edm.Guid"/>
+                <NavigationProperty Name="demo" Relationship="CatalogService.ScheduleDemo_demo" FromRole="ScheduleDemo" ToRole="Demo"/>
+                <Property Name="demo_ID" Type="Edm.Guid"/>
+                <Property Name="IsActiveEntity" Type="Edm.Boolean" Nullable="false"/>
+                <Property Name="HasActiveEntity" Type="Edm.Boolean" Nullable="false"/>
+                <Property Name="HasDraftEntity" Type="Edm.Boolean" Nullable="false"/>
+                <NavigationProperty Name="DraftAdministrativeData" Relationship="CatalogService.ScheduleDemo_DraftAdministrativeData" FromRole="ScheduleDemo" ToRole="DraftAdministrativeData"/>
+                <Property Name="DraftAdministrativeData_DraftUUID" Type="Edm.Guid"/>
+                <NavigationProperty Name="SiblingEntity" Relationship="CatalogService.ScheduleDemo_SiblingEntity" FromRole="ScheduleDemo" ToRole="ScheduleDemo1"/>
+            </EntityType>
+            <EntityType Name="ScheduleCreate">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="createdAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="createdBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="modifiedAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="modifiedBy" Type="Edm.String" MaxLength="255"/>
+                <NavigationProperty Name="opportunity" Relationship="CatalogService.ScheduleCreate_opportunity" FromRole="ScheduleCreate" ToRole="Opportunity"/>
+                <Property Name="opportunity_oppId" Type="Edm.String" MaxLength="70" Nullable="false"/>
+                <Property Name="mainContact" Type="Edm.String" Nullable="false"/>
+                <Property Name="mail" Type="Edm.String" Nullable="false"/>
+                <Property Name="phoneNumber" Type="Edm.String"/>
+                <Property Name="desiredDate" Type="Edm.DateTime" Nullable="false" sap:display-format="Date"/>
+                <NavigationProperty Name="invitedList" Relationship="CatalogService.ScheduleCreateInvited_schedule" FromRole="ScheduleCreate" ToRole="ScheduleCreateInvited"/>
+                <NavigationProperty Name="demos" Relationship="CatalogService.ScheduleCreateDemo_schedule" FromRole="ScheduleCreate" ToRole="ScheduleCreateDemo"/>
+                <Property Name="scheduleObs" Type="Edm.String"/>
+                <NavigationProperty Name="scheduleStatus" Relationship="CatalogService.ScheduleCreate_scheduleStatus" FromRole="ScheduleCreate" ToRole="ScheduleStatus"/>
+                <Property Name="scheduleStatus_scheduleStatus" Type="Edm.Int32"/>
+            </EntityType>
+            <EntityType Name="ScheduleCreateInvited">
+                <NavigationProperty Name="schedule" Relationship="CatalogService.ScheduleCreateInvited_schedule" FromRole="ScheduleCreateInvited" ToRole="ScheduleCreate"/>
+                <Property Name="schedule_ID" Type="Edm.Guid"/>
+            </EntityType>
+            <EntityType Name="ScheduleCreateDemo">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <NavigationProperty Name="schedule" Relationship="CatalogService.ScheduleCreateDemo_schedule" FromRole="ScheduleCreateDemo" ToRole="ScheduleCreate"/>
+                <Property Name="schedule_ID" Type="Edm.Guid"/>
+                <NavigationProperty Name="demo" Relationship="CatalogService.ScheduleCreateDemo_demo" FromRole="ScheduleCreateDemo" ToRole="DemoCreate"/>
+                <Property Name="demo_ID" Type="Edm.Guid"/>
+            </EntityType>
+            <EntityType Name="DemoCreate" m:HasStream="true">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="createdAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="createdBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="modifiedAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="modifiedBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="demoName" Type="Edm.String"/>
+                <Property Name="demoDescription" Type="Edm.String"/>
+                <Property Name="demoExperience" Type="Edm.String"/>
+                <Property Name="demoObs" Type="Edm.String"/>
+                <Property Name="demoStatus" Type="Edm.String"/>
+                <Property Name="videoURLEN" Type="Edm.String"/>
+                <Property Name="videoURLPT" Type="Edm.String"/>
+            </EntityType>
+            <EntityType Name="DraftAdministrativeData">
+                <Key>
+                    <PropertyRef Name="DraftUUID"/>
+                </Key>
+                <Property Name="DraftUUID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="CreationDateTime" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="CreatedByUser" Type="Edm.String" MaxLength="256"/>
+                <Property Name="DraftIsCreatedByMe" Type="Edm.Boolean"/>
+                <Property Name="LastChangeDateTime" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="LastChangedByUser" Type="Edm.String" MaxLength="256"/>
+                <Property Name="InProcessByUser" Type="Edm.String" MaxLength="256"/>
+                <Property Name="DraftIsProcessedByMe" Type="Edm.Boolean"/>
+            </EntityType>
+            <EntityType Name="ScheduleStatus_texts">
+                <Key>
+                    <PropertyRef Name="locale"/>
+                    <PropertyRef Name="scheduleStatus"/>
+                </Key>
+                <Property Name="locale" Type="Edm.String" MaxLength="14" Nullable="false"/>
+                <Property Name="scheduleStatus" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="txtScheduleStatus" Type="Edm.String"/>
+            </EntityType>
+            <Association Name="ScheduleStatus_texts_1">
+                <End Role="ScheduleStatus" Type="CatalogService.ScheduleStatus" Multiplicity="1">
+                    <OnDelete Action="Cascade"/>
+                </End>
+                <End Role="ScheduleStatus_texts" Type="CatalogService.ScheduleStatus_texts" Multiplicity="*"/>
+            </Association>
+            <Association Name="ScheduleStatus_localized">
+                <End Role="ScheduleStatus" Type="CatalogService.ScheduleStatus" Multiplicity="*"/>
+                <End Role="ScheduleStatus_texts" Type="CatalogService.ScheduleStatus_texts" Multiplicity="0..1"/>
+            </Association>
+            <Association Name="Demo_DraftAdministrativeData">
+                <End Role="Demo" Type="CatalogService.Demo" Multiplicity="*"/>
+                <End Role="DraftAdministrativeData" Type="CatalogService.DraftAdministrativeData" Multiplicity="0..1"/>
+                <ReferentialConstraint>
+                    <Principal Role="DraftAdministrativeData">
+                        <PropertyRef Name="DraftUUID"/>
+                    </Principal>
+                    <Dependent Role="Demo">
+                        <PropertyRef Name="DraftAdministrativeData_DraftUUID"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="Demo_SiblingEntity">
+                <End Role="Demo" Type="CatalogService.Demo" Multiplicity="*"/>
+                <End Role="Demo1" Type="CatalogService.Demo" Multiplicity="0..1"/>
+            </Association>
+            <Association Name="Schedule_opportunity">
+                <End Role="Schedule" Type="CatalogService.Schedule" Multiplicity="*"/>
+                <End Role="Opportunity" Type="CatalogService.Opportunity" Multiplicity="1"/>
+                <ReferentialConstraint>
+                    <Principal Role="Opportunity">
+                        <PropertyRef Name="oppId"/>
+                    </Principal>
+                    <Dependent Role="Schedule">
+                        <PropertyRef Name="opportunity_oppId"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="Schedule_scheduleStatus">
+                <End Role="Schedule" Type="CatalogService.Schedule" Multiplicity="*"/>
+                <End Role="ScheduleStatus" Type="CatalogService.ScheduleStatus" Multiplicity="0..1"/>
+                <ReferentialConstraint>
+                    <Principal Role="ScheduleStatus">
+                        <PropertyRef Name="scheduleStatus"/>
+                    </Principal>
+                    <Dependent Role="Schedule">
+                        <PropertyRef Name="scheduleStatus_scheduleStatus"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="Schedule_DraftAdministrativeData">
+                <End Role="Schedule" Type="CatalogService.Schedule" Multiplicity="*"/>
+                <End Role="DraftAdministrativeData" Type="CatalogService.DraftAdministrativeData" Multiplicity="0..1"/>
+                <ReferentialConstraint>
+                    <Principal Role="DraftAdministrativeData">
+                        <PropertyRef Name="DraftUUID"/>
+                    </Principal>
+                    <Dependent Role="Schedule">
+                        <PropertyRef Name="DraftAdministrativeData_DraftUUID"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="Schedule_SiblingEntity">
+                <End Role="Schedule" Type="CatalogService.Schedule" Multiplicity="*"/>
+                <End Role="Schedule1" Type="CatalogService.Schedule" Multiplicity="0..1"/>
+            </Association>
+            <Association Name="ScheduleInvited_schedule">
+                <End Role="ScheduleInvited" Type="CatalogService.ScheduleInvited" Multiplicity="*"/>
+                <End Role="Schedule" Type="CatalogService.Schedule" Multiplicity="0..1">
+                    <OnDelete Action="Cascade"/>
+                </End>
+            </Association>
+            <Association Name="ScheduleInvited_DraftAdministrativeData">
+                <End Role="ScheduleInvited" Type="CatalogService.ScheduleInvited" Multiplicity="*"/>
+                <End Role="DraftAdministrativeData" Type="CatalogService.DraftAdministrativeData" Multiplicity="0..1"/>
+                <ReferentialConstraint>
+                    <Principal Role="DraftAdministrativeData">
+                        <PropertyRef Name="DraftUUID"/>
+                    </Principal>
+                    <Dependent Role="ScheduleInvited">
+                        <PropertyRef Name="DraftAdministrativeData_DraftUUID"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="ScheduleInvited_SiblingEntity">
+                <End Role="ScheduleInvited" Type="CatalogService.ScheduleInvited" Multiplicity="*"/>
+                <End Role="ScheduleInvited1" Type="CatalogService.ScheduleInvited" Multiplicity="0..1"/>
+            </Association>
+            <Association Name="ScheduleDemo_schedule">
+                <End Role="ScheduleDemo" Type="CatalogService.ScheduleDemo" Multiplicity="*"/>
+                <End Role="Schedule" Type="CatalogService.Schedule" Multiplicity="0..1">
+                    <OnDelete Action="Cascade"/>
+                </End>
+            </Association>
+            <Association Name="ScheduleDemo_demo">
+                <End Role="ScheduleDemo" Type="CatalogService.ScheduleDemo" Multiplicity="*"/>
+                <End Role="Demo" Type="CatalogService.Demo" Multiplicity="0..1"/>
+            </Association>
+            <Association Name="ScheduleDemo_DraftAdministrativeData">
+                <End Role="ScheduleDemo" Type="CatalogService.ScheduleDemo" Multiplicity="*"/>
+                <End Role="DraftAdministrativeData" Type="CatalogService.DraftAdministrativeData" Multiplicity="0..1"/>
+                <ReferentialConstraint>
+                    <Principal Role="DraftAdministrativeData">
+                        <PropertyRef Name="DraftUUID"/>
+                    </Principal>
+                    <Dependent Role="ScheduleDemo">
+                        <PropertyRef Name="DraftAdministrativeData_DraftUUID"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="ScheduleDemo_SiblingEntity">
+                <End Role="ScheduleDemo" Type="CatalogService.ScheduleDemo" Multiplicity="*"/>
+                <End Role="ScheduleDemo1" Type="CatalogService.ScheduleDemo" Multiplicity="0..1"/>
+            </Association>
+            <Association Name="ScheduleCreate_opportunity">
+                <End Role="ScheduleCreate" Type="CatalogService.ScheduleCreate" Multiplicity="*"/>
+                <End Role="Opportunity" Type="CatalogService.Opportunity" Multiplicity="1"/>
+                <ReferentialConstraint>
+                    <Principal Role="Opportunity">
+                        <PropertyRef Name="oppId"/>
+                    </Principal>
+                    <Dependent Role="ScheduleCreate">
+                        <PropertyRef Name="opportunity_oppId"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="ScheduleCreate_scheduleStatus">
+                <End Role="ScheduleCreate" Type="CatalogService.ScheduleCreate" Multiplicity="*"/>
+                <End Role="ScheduleStatus" Type="CatalogService.ScheduleStatus" Multiplicity="0..1"/>
+                <ReferentialConstraint>
+                    <Principal Role="ScheduleStatus">
+                        <PropertyRef Name="scheduleStatus"/>
+                    </Principal>
+                    <Dependent Role="ScheduleCreate">
+                        <PropertyRef Name="scheduleStatus_scheduleStatus"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="ScheduleCreateInvited_schedule">
+                <End Role="ScheduleCreateInvited" Type="CatalogService.ScheduleCreateInvited" Multiplicity="*"/>
+                <End Role="ScheduleCreate" Type="CatalogService.ScheduleCreate" Multiplicity="0..1">
+                    <OnDelete Action="Cascade"/>
+                </End>
+                <ReferentialConstraint>
+                    <Principal Role="ScheduleCreate">
+                        <PropertyRef Name="ID"/>
+                    </Principal>
+                    <Dependent Role="ScheduleCreateInvited">
+                        <PropertyRef Name="schedule_ID"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="ScheduleCreateDemo_schedule">
+                <End Role="ScheduleCreateDemo" Type="CatalogService.ScheduleCreateDemo" Multiplicity="*"/>
+                <End Role="ScheduleCreate" Type="CatalogService.ScheduleCreate" Multiplicity="0..1">
+                    <OnDelete Action="Cascade"/>
+                </End>
+                <ReferentialConstraint>
+                    <Principal Role="ScheduleCreate">
+                        <PropertyRef Name="ID"/>
+                    </Principal>
+                    <Dependent Role="ScheduleCreateDemo">
+                        <PropertyRef Name="schedule_ID"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="ScheduleCreateDemo_demo">
+                <End Role="ScheduleCreateDemo" Type="CatalogService.ScheduleCreateDemo" Multiplicity="*"/>
+                <End Role="DemoCreate" Type="CatalogService.DemoCreate" Multiplicity="0..1"/>
+                <ReferentialConstraint>
+                    <Principal Role="DemoCreate">
+                        <PropertyRef Name="ID"/>
+                    </Principal>
+                    <Dependent Role="ScheduleCreateDemo">
+                        <PropertyRef Name="demo_ID"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Annotations Target="CatalogService.Opportunity" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.LineItem">
+                    <Collection>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="oppId"/>
+                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="oppDescription"/>
+                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="companyName"/>
+                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="quarter"/>
+                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="accountOwner"/>
+                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="oppPhase"/>
+                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="fcCategory"/>
+                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="dealSize"/>
+                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="UI.PresentationVariant">
+                    <Record Type="UI.PresentationVariantType">
+                        <PropertyValue Property="SortOrder">
+                            <Collection>
+                                <Record Type="Common.SortOrderType">
+                                    <PropertyValue Property="Property" PropertyPath="oppId"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.SelectionFields">
+                    <Collection>
+                        <PropertyPath>oppId</PropertyPath>
+                        <PropertyPath>oppDescription</PropertyPath>
+                        <PropertyPath>companyName</PropertyPath>
+                        <PropertyPath>oppPhase</PropertyPath>
+                        <PropertyPath>fcCategory</PropertyPath>
+                        <PropertyPath>quarter</PropertyPath>
+                        <PropertyPath>accountOwner</PropertyPath>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="UI.HeaderInfo">
+                    <Record Type="UI.HeaderInfoType">
+                        <PropertyValue Property="Title">
+                            <Record Type="UI.DataField">
+                                <PropertyValue Property="Value" Path="oppId"/>
+                            </Record>
+                        </PropertyValue>
+                        <PropertyValue Property="TypeName" String="Opportunity"/>
+                        <PropertyValue Property="TypeNamePlural" String="Opportunities"/>
+                        <PropertyValue Property="Description">
+                            <Record Type="UI.DataField">
+                                <PropertyValue Property="Value" Path="oppDescription"/>
+                            </Record>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.FieldGroup" Qualifier="GeneralData">
+                    <Record Type="UI.FieldGroupType">
+                        <PropertyValue Property="Data">
+                            <Collection>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="dealSize"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="accountOwner"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="companyName"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="amount"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="quarter"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="fcCategory"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="oppPhase"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="fcCategory"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="opportunityOwner"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="salesOffice"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="channelPartner"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="channelPartnerID"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="onPremCloud"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="marketBasket"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="errorFlag"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="dealType"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="overallFCReliability"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="dealScored"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="fcHygieneIndex"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="totalOpportunityCost"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="presalesLeadComments"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.Facets">
+                    <Collection>
+                        <Record Type="UI.ReferenceFacet">
+                            <PropertyValue Property="Label" String="General Data"/>
+                            <PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#GeneralData"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextOnly"/>
+                <Annotation Term="UI.Identification">
+                    <Collection>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="oppId"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="Common.SemanticKey">
+                    <Collection>
+                        <PropertyPath>oppId</PropertyPath>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="Common.Label" String="Opportunity"/>
+                <Annotation Term="Core.Description" Path="oppDescription"/>
+            </Annotations>
+            <Annotations Target="CatalogService.EntityContainer/Opportunity" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.PresentationVariant">
+                    <Record Type="UI.PresentationVariantType">
+                        <PropertyValue Property="SortOrder">
+                            <Collection>
+                                <Record Type="Common.SortOrderType">
+                                    <PropertyValue Property="Property" PropertyPath="oppId"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="CatalogService.Opportunity/oppId" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+                <Annotation Term="Common.Label" String="Opp. ID"/>
+                <Annotation Term="Core.Description" String="Opp. ID"/>
+            </Annotations>
+            <Annotations Target="CatalogService.Opportunity/oppDescription" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Core.Description" String="true"/>
+                <Annotation Term="Common.Label" String="Opp. Descrip."/>
+            </Annotations>
+            <Annotations Target="CatalogService.Opportunity/dealSize" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Deal Size"/>
+                <Annotation Term="Core.Description" String="Deal Size"/>
+            </Annotations>
+            <Annotations Target="CatalogService.Opportunity/accountOwner" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Account Owner"/>
+                <Annotation Term="Core.Description" String="Account Owner"/>
+            </Annotations>
+            <Annotations Target="CatalogService.Opportunity/companyName" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Company Name"/>
+                <Annotation Term="Core.Description" String="Company Name"/>
+            </Annotations>
+            <Annotations Target="CatalogService.Opportunity/amount" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Amount"/>
+                <Annotation Term="Core.Description" String="Amount"/>
+            </Annotations>
+            <Annotations Target="CatalogService.Opportunity/quarter" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Quarter"/>
+                <Annotation Term="Core.Description" String="Quarter"/>
+            </Annotations>
+            <Annotations Target="CatalogService.Opportunity/fcCategory" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Forecast Cat."/>
+                <Annotation Term="Core.Description" String="Forecast Cat."/>
+            </Annotations>
+            <Annotations Target="CatalogService.Opportunity/oppPhase" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Opp. Phase"/>
+                <Annotation Term="Core.Description" String="Opp. Phase"/>
+            </Annotations>
+            <Annotations Target="CatalogService.Opportunity/opportunityOwner" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Opp. Owner"/>
+                <Annotation Term="Core.Description" String="Opp. Owner"/>
+            </Annotations>
+            <Annotations Target="CatalogService.Opportunity/salesOffice" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Sales Office"/>
+                <Annotation Term="Core.Description" String="Sales Office"/>
+            </Annotations>
+            <Annotations Target="CatalogService.Opportunity/channelPartner" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Channel Partner"/>
+                <Annotation Term="Core.Description" String="Channel Partner"/>
+            </Annotations>
+            <Annotations Target="CatalogService.Opportunity/channelPartnerID" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Channel Part. ID"/>
+                <Annotation Term="Core.Description" String="Channel Part. ID"/>
+            </Annotations>
+            <Annotations Target="CatalogService.Opportunity/onPremCloud" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="On-prem/Cloud"/>
+                <Annotation Term="Core.Description" String="On-prem/Cloud"/>
+            </Annotations>
+            <Annotations Target="CatalogService.Opportunity/errorFlag" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Error"/>
+                <Annotation Term="Core.Description" String="Error"/>
+            </Annotations>
+            <Annotations Target="CatalogService.Opportunity/dealType" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Deal Type"/>
+                <Annotation Term="Core.Description" String="Deal Type"/>
+            </Annotations>
+            <Annotations Target="CatalogService.Opportunity/overallFCReliability" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Forescast Realiability"/>
+                <Annotation Term="Core.Description" String="Forescast Realiability"/>
+            </Annotations>
+            <Annotations Target="CatalogService.Opportunity/dealScored" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Deal Scored"/>
+                <Annotation Term="Core.Description" String="Deal Scored"/>
+            </Annotations>
+            <Annotations Target="CatalogService.Opportunity/fcHygieneIndex" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="FC Hyg. Index"/>
+                <Annotation Term="Core.Description" String="FC Hyg. Index"/>
+            </Annotations>
+            <Annotations Target="CatalogService.Opportunity/totalOpportunityCost" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Total Opp. Cost"/>
+                <Annotation Term="Core.Description" String="Total Opp. Cost"/>
+            </Annotations>
+            <Annotations Target="CatalogService.Opportunity/presalesLeadComments" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.MultiLineText" Bool="true"/>
+                <Annotation Term="Common.Label" String="Presales Lead Comments"/>
+                <Annotation Term="Core.Description" String="Presales Lead Comments"/>
+            </Annotations>
+            <Annotations Target="CatalogService.ScheduleStatus" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextOnly"/>
+                <Annotation Term="UI.Identification">
+                    <Collection>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="txtScheduleStatus"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="Common.SemanticKey">
+                    <Collection>
+                        <PropertyPath>txtScheduleStatus</PropertyPath>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="Common.Label" String="Schedule status"/>
+                <Annotation Term="Core.Description" Path="txtScheduleStatus"/>
+            </Annotations>
+            <Annotations Target="CatalogService.ScheduleStatus/scheduleStatus" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Text" Path="txtScheduleStatus">
+                    <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextOnly"/>
+                </Annotation>
+                <Annotation Term="Common.Label" String="Schedule status"/>
+                <Annotation Term="Core.Description" String="Schedule status"/>
+            </Annotations>
+            <Annotations Target="CatalogService.ScheduleStatus/txtScheduleStatus" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+                <Annotation Term="Common.TextFor" PropertyPath="scheduleStatus"/>
+                <Annotation Term="Common.Label" String="Schedule status"/>
+                <Annotation Term="Core.Description" String="Schedule status"/>
+            </Annotations>
+            <Annotations Target="CatalogService.Demo" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.LineItem">
+                    <Collection>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="demoImage"/>
+                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="demoName"/>
+                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="demoDescription"/>
+                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="demoStatus"/>
+                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="videoURLPT"/>
+                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="videoURLEN"/>
+                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="UI.PresentationVariant">
+                    <Record Type="UI.PresentationVariantType">
+                        <PropertyValue Property="SortOrder">
+                            <Collection>
+                                <Record Type="Common.SortOrderType">
+                                    <PropertyValue Property="Property" PropertyPath="demoName"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.SelectionFields">
+                    <Collection>
+                        <PropertyPath>demoName</PropertyPath>
+                        <PropertyPath>demoDescription</PropertyPath>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="UI.HeaderInfo">
+                    <Record Type="UI.HeaderInfoType">
+                        <PropertyValue Property="Title">
+                            <Record Type="UI.DataField">
+                                <PropertyValue Property="Value" Path="demoName"/>
+                            </Record>
+                        </PropertyValue>
+                        <PropertyValue Property="TypeName" String="Demos"/>
+                        <PropertyValue Property="TypeNamePlural" String="Demo"/>
+                        <PropertyValue Property="Description">
+                            <Record Type="UI.DataField">
+                                <PropertyValue Property="Value" Path="demoDescription"/>
+                            </Record>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.HeaderFacets">
+                    <Collection>
+                        <Record Type="UI.ReferenceFacet">
+                            <PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#Admin"/>
+                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/Medium"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="UI.FieldGroup" Qualifier="GeneralData">
+                    <Record Type="UI.FieldGroupType">
+                        <PropertyValue Property="Data">
+                            <Collection>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="demoName"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="demoDescription"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="demoObs"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="demoStatus"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="videoURLEN"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="videoURLPT"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.FieldGroup" Qualifier="Image">
+                    <Record Type="UI.FieldGroupType">
+                        <PropertyValue Property="Data">
+                            <Collection>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="demoImage"/>
+                                    <PropertyValue Property="Label" String=""/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.FieldGroup" Qualifier="Admin">
+                    <Record Type="UI.FieldGroupType">
+                        <PropertyValue Property="Data">
+                            <Collection>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="createdBy"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="modifiedBy"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="createdAt"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="modifiedAt"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.Facets">
+                    <Collection>
+                        <Record Type="UI.ReferenceFacet">
+                            <PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#Image"/>
+                            <PropertyValue Property="Label" String="Image"/>
+                        </Record>
+                        <Record Type="UI.ReferenceFacet">
+                            <PropertyValue Property="Label" String="General Data"/>
+                            <PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#GeneralData"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextOnly"/>
+                <Annotation Term="UI.Identification">
+                    <Collection>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="demoName"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="Common.SemanticKey">
+                    <Collection>
+                        <PropertyPath>demoName</PropertyPath>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="Common.Label" String="Demo"/>
+                <Annotation Term="Core.Description" Path="demoName"/>
+                <Annotation Term="Core.MediaType" String="image/png"/>
+            </Annotations>
+            <Annotations Target="CatalogService.EntityContainer/Demo" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.PresentationVariant">
+                    <Record Type="UI.PresentationVariantType">
+                        <PropertyValue Property="SortOrder">
+                            <Collection>
+                                <Record Type="Common.SortOrderType">
+                                    <PropertyValue Property="Property" PropertyPath="demoName"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Common.DraftRoot">
+                    <Record Type="Common.DraftRootType">
+                        <PropertyValue Property="ActivationAction" String="CatalogService.EntityContainer/Demo_draftActivate"/>
+                        <PropertyValue Property="EditAction" String="CatalogService.EntityContainer/Demo_draftEdit"/>
+                        <PropertyValue Property="PreparationAction" String="CatalogService.EntityContainer/Demo_draftPrepare"/>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="CatalogService.Demo/ID" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Common.Text" Path="demoName">
+                    <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextOnly"/>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="CatalogService.Demo/createdAt" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="Core.Immutable" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Common.Label" String="Created On"/>
+            </Annotations>
+            <Annotations Target="CatalogService.Demo/createdBy" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="Core.Immutable" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Core.Description" String="User's unique ID"/>
+                <Annotation Term="Common.Label" String="Created By"/>
+            </Annotations>
+            <Annotations Target="CatalogService.Demo/modifiedAt" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Common.Label" String="Changed On"/>
+            </Annotations>
+            <Annotations Target="CatalogService.Demo/modifiedBy" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Core.Description" String="User's unique ID"/>
+                <Annotation Term="Common.Label" String="Changed By"/>
+            </Annotations>
+            <Annotations Target="CatalogService.Demo/demoName" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+                <Annotation Term="Common.TextFor" PropertyPath="ID"/>
+                <Annotation Term="Common.Label" String="Demo name"/>
+                <Annotation Term="Core.Description" String="Demo name"/>
+            </Annotations>
+            <Annotations Target="CatalogService.Demo/demoDescription" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Core.Description" String="true"/>
+                <Annotation Term="UI.MultiLineText" Bool="true"/>
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+                <Annotation Term="Common.Label" String="Demo Description"/>
+            </Annotations>
+            <Annotations Target="CatalogService.Demo/demoExperience" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Demo Experience"/>
+                <Annotation Term="Core.Description" String="Demo Experience"/>
+            </Annotations>
+            <Annotations Target="CatalogService.Demo/demoObs" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Core.LongDescription" String="true"/>
+                <Annotation Term="Core.Description" String="Demo Obs."/>
+                <Annotation Term="Common.Label" String="Demo Obs."/>
+            </Annotations>
+            <Annotations Target="CatalogService.Demo/demoStatus" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Demo Status"/>
+                <Annotation Term="Core.Description" String="Demo Status"/>
+            </Annotations>
+            <Annotations Target="CatalogService.Demo/demoImage" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Image"/>
+                <Annotation Term="Core.Description" String="Image"/>
+            </Annotations>
+            <Annotations Target="CatalogService.Demo/videoURLEN" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Video URL EN"/>
+                <Annotation Term="Core.Description" String="Video URL EN"/>
+            </Annotations>
+            <Annotations Target="CatalogService.Demo/videoURLPT" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Video URL PT"/>
+                <Annotation Term="Core.Description" String="Video URL PT"/>
+            </Annotations>
+            <Annotations Target="CatalogService.Demo/IsActiveEntity" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="CatalogService.Demo/HasActiveEntity" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="CatalogService.Demo/HasDraftEntity" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="CatalogService.Demo/DraftAdministrativeData" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="CatalogService.Demo/DraftAdministrativeData_DraftUUID" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="CatalogService.Schedule" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.LineItem">
+                    <Collection>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="desiredDate"/>
+                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="opportunity/oppId"/>
+                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="opportunity/companyName"/>
+                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="scheduleStatus/txtScheduleStatus"/>
+                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="opportunity/oppPhase"/>
+                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="opportunity/quarter"/>
+                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/Medium"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="scheduleObs"/>
+                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="UI.PresentationVariant">
+                    <Record Type="UI.PresentationVariantType">
+                        <PropertyValue Property="SortOrder">
+                            <Collection>
+                                <Record Type="Common.SortOrderType">
+                                    <PropertyValue Property="Property" PropertyPath="desiredDate"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.SelectionFields">
+                    <Collection>
+                        <PropertyPath>desiredDate</PropertyPath>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="UI.HeaderInfo">
+                    <Record Type="UI.HeaderInfoType">
+                        <PropertyValue Property="Title">
+                            <Record Type="UI.DataField">
+                                <PropertyValue Property="Value" Path="opportunity_oppId"/>
+                            </Record>
+                        </PropertyValue>
+                        <PropertyValue Property="TypeName" String="Schedule"/>
+                        <PropertyValue Property="TypeNamePlural" String="Schedules"/>
+                        <PropertyValue Property="Description">
+                            <Record Type="UI.DataField">
+                                <PropertyValue Property="Value" String="Schedules"/>
+                            </Record>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.HeaderFacets">
+                    <Collection>
+                        <Record Type="UI.ReferenceFacet">
+                            <PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#Admin"/>
+                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/Medium"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="UI.FieldGroup" Qualifier="GeneralData">
+                    <Record Type="UI.FieldGroupType">
+                        <PropertyValue Property="Data">
+                            <Collection>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="opportunity_oppId"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="opportunity/oppDescription"/>
+                                    <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/ReadOnly"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="opportunity/companyName"/>
+                                    <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/ReadOnly"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="opportunity/oppPhase"/>
+                                    <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/ReadOnly"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="opportunity/quarter"/>
+                                    <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/ReadOnly"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="mainContact"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="mail"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="phoneNumber"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="desiredDate"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.FieldGroup" Qualifier="Obs">
+                    <Record Type="UI.FieldGroupType">
+                        <PropertyValue Property="Data">
+                            <Collection>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="scheduleObs"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="scheduleStatus_scheduleStatus"/>
+                                    <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/ReadOnly"/>
+                                    <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/Low"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.FieldGroup" Qualifier="Admin">
+                    <Record Type="UI.FieldGroupType">
+                        <PropertyValue Property="Data">
+                            <Collection>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="createdBy"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="modifiedBy"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="createdAt"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="modifiedAt"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.Facets">
+                    <Collection>
+                        <Record Type="UI.ReferenceFacet">
+                            <PropertyValue Property="Label" String="General Data"/>
+                            <PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#GeneralData"/>
+                        </Record>
+                        <Record Type="UI.ReferenceFacet">
+                            <PropertyValue Property="Label" String="Invited List"/>
+                            <PropertyValue Property="Target" AnnotationPath="invitedList/@UI.LineItem"/>
+                        </Record>
+                        <Record Type="UI.ReferenceFacet">
+                            <PropertyValue Property="Label" String="Demos"/>
+                            <PropertyValue Property="Target" AnnotationPath="demos/@UI.LineItem"/>
+                        </Record>
+                        <Record Type="UI.ReferenceFacet">
+                            <PropertyValue Property="Label" String="Obs"/>
+                            <PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#Obs"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextOnly"/>
+                <Annotation Term="UI.Identification">
+                    <Collection>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="desiredDate"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="opportunity/companyName"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="Common.SemanticKey">
+                    <Collection>
+                        <PropertyPath>desiredDate</PropertyPath>
+                        <PropertyPath>opportunity/companyName</PropertyPath>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="Common.Label" String="Schedule"/>
+                <Annotation Term="Core.Description" Path="opportunity/companyName"/>
+            </Annotations>
+            <Annotations Target="CatalogService.EntityContainer/Schedule" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.PresentationVariant">
+                    <Record Type="UI.PresentationVariantType">
+                        <PropertyValue Property="SortOrder">
+                            <Collection>
+                                <Record Type="Common.SortOrderType">
+                                    <PropertyValue Property="Property" PropertyPath="desiredDate"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Common.DraftRoot">
+                    <Record Type="Common.DraftRootType">
+                        <PropertyValue Property="ActivationAction" String="CatalogService.EntityContainer/Schedule_draftActivate"/>
+                        <PropertyValue Property="EditAction" String="CatalogService.EntityContainer/Schedule_draftEdit"/>
+                        <PropertyValue Property="PreparationAction" String="CatalogService.EntityContainer/Schedule_draftPrepare"/>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="CatalogService.Schedule/ID" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Core.Description" String="ID"/>
+                <Annotation Term="Common.Text" Path="opportunity/companyName">
+                    <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextOnly"/>
+                </Annotation>
+                <Annotation Term="Common.Label" String="ID"/>
+            </Annotations>
+            <Annotations Target="CatalogService.Schedule/createdAt" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="Core.Immutable" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Common.Label" String="Created On"/>
+            </Annotations>
+            <Annotations Target="CatalogService.Schedule/createdBy" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="Core.Immutable" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Core.Description" String="User's unique ID"/>
+                <Annotation Term="Common.Label" String="Created By"/>
+            </Annotations>
+            <Annotations Target="CatalogService.Schedule/modifiedAt" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Common.Label" String="Changed On"/>
+            </Annotations>
+            <Annotations Target="CatalogService.Schedule/modifiedBy" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Core.Description" String="User's unique ID"/>
+                <Annotation Term="Common.Label" String="Changed By"/>
+            </Annotations>
+            <Annotations Target="CatalogService.Schedule/opportunity" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Opportunity"/>
+                <Annotation Term="Core.Description" String="Opportunity"/>
+            </Annotations>
+            <Annotations Target="CatalogService.Schedule/opportunity_oppId" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+                <Annotation Term="Common.Text" Path="opportunity/oppId">
+                    <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextOnly"/>
+                </Annotation>
+                <Annotation Term="Common.ValueList">
+                    <Record Type="Common.ValueListType">
+                        <PropertyValue Property="CollectionPath" String="Opportunity"/>
+                        <PropertyValue Property="SearchSupported" Bool="true"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="opportunity_oppId"/>
+                                    <PropertyValue Property="ValueListProperty" String="oppId"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="companyName"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="oppDescription"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="oppPhase"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="quarter"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Common.Label" String="Opportunity"/>
+                <Annotation Term="Core.Description" String="Opportunity"/>
+            </Annotations>
+            <Annotations Target="CatalogService.Schedule/mainContact" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+                <Annotation Term="Common.Label" String="Main contact"/>
+                <Annotation Term="Core.Description" String="Main contact"/>
+            </Annotations>
+            <Annotations Target="CatalogService.Schedule/mail" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Communication.IsEmailAddress" Bool="true"/>
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+                <Annotation Term="Common.Label" String="Email"/>
+                <Annotation Term="Core.Description" String="Email"/>
+            </Annotations>
+            <Annotations Target="CatalogService.Schedule/phoneNumber" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Communication.IsPhoneNumber" Bool="true"/>
+                <Annotation Term="Common.Label" String="Phone Number"/>
+                <Annotation Term="Core.Description" String="Phone Number"/>
+            </Annotations>
+            <Annotations Target="CatalogService.Schedule/desiredDate" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+                <Annotation Term="Common.Label" String="Desired Date"/>
+                <Annotation Term="Core.Description" String="Desired Date"/>
+            </Annotations>
+            <Annotations Target="CatalogService.Schedule/invitedList" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Invited List"/>
+                <Annotation Term="Core.Description" String="Invited List"/>
+            </Annotations>
+            <Annotations Target="CatalogService.Schedule/demos" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Demos"/>
+                <Annotation Term="Core.Description" String="Demos"/>
+            </Annotations>
+            <Annotations Target="CatalogService.Schedule/scheduleObs" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Core.LongDescription" String="true"/>
+                <Annotation Term="Core.Description" String="What you expect to address during the tour"/>
+                <Annotation Term="UI.MultiLineText" Bool="true"/>
+                <Annotation Term="Common.Label" String="What you expect to address during the tour"/>
+            </Annotations>
+            <Annotations Target="CatalogService.Schedule/scheduleStatus" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Schedule status"/>
+                <Annotation Term="Core.Description" String="Schedule status"/>
+            </Annotations>
+            <Annotations Target="CatalogService.Schedule/scheduleStatus_scheduleStatus" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Text" Path="scheduleStatus/txtScheduleStatus">
+                    <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextOnly"/>
+                </Annotation>
+                <Annotation Term="Common.ValueList">
+                    <Record Type="Common.ValueListType">
+                        <PropertyValue Property="CollectionPath" String="ScheduleStatus"/>
+                        <PropertyValue Property="SearchSupported" Bool="true"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="scheduleStatus_scheduleStatus"/>
+                                    <PropertyValue Property="ValueListProperty" String="ID"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="txtScheduleStatus"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Common.Label" String="Schedule status"/>
+                <Annotation Term="Core.Description" String="Schedule status"/>
+            </Annotations>
+            <Annotations Target="CatalogService.Schedule/IsActiveEntity" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="CatalogService.Schedule/HasActiveEntity" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="CatalogService.Schedule/HasDraftEntity" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="CatalogService.Schedule/DraftAdministrativeData" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="CatalogService.Schedule/DraftAdministrativeData_DraftUUID" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="CatalogService.ScheduleInvited" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextOnly"/>
+                <Annotation Term="UI.LineItem">
+                    <Collection>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="invitedName"/>
+                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="invitedEmail"/>
+                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="UI.PresentationVariant">
+                    <Record Type="UI.PresentationVariantType">
+                        <PropertyValue Property="SortOrder">
+                            <Collection>
+                                <Record Type="Common.SortOrderType">
+                                    <PropertyValue Property="Property" PropertyPath="invitedName"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.HeaderInfo">
+                    <Record Type="UI.HeaderInfoType">
+                        <PropertyValue Property="Title">
+                            <Record Type="UI.DataField">
+                                <PropertyValue Property="Value" String="Invitee"/>
+                            </Record>
+                        </PropertyValue>
+                        <PropertyValue Property="TypeName" String="Invitee"/>
+                        <PropertyValue Property="TypeNamePlural" String="Invitee"/>
+                        <PropertyValue Property="Description">
+                            <Record Type="UI.DataField">
+                                <PropertyValue Property="Value" String="Invitee"/>
+                            </Record>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.FieldGroup" Qualifier="Details">
+                    <Record Type="UI.FieldGroupType">
+                        <PropertyValue Property="Data">
+                            <Collection>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="invitedName"/>
+                                    <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="invitedEmail"/>
+                                    <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.Facets">
+                    <Collection>
+                        <Record Type="UI.CollectionFacet">
+                            <PropertyValue Property="ID" String="CompaniesPrefecturesDetails"/>
+                            <PropertyValue Property="Label" String="Details"/>
+                            <PropertyValue Property="Facets">
+                                <Collection>
+                                    <Record Type="UI.ReferenceFacet">
+                                        <PropertyValue Property="Label" String="Details"/>
+                                        <PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#Details"/>
+                                    </Record>
+                                </Collection>
+                            </PropertyValue>
+                        </Record>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="CatalogService.EntityContainer/ScheduleInvited" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.PresentationVariant">
+                    <Record Type="UI.PresentationVariantType">
+                        <PropertyValue Property="SortOrder">
+                            <Collection>
+                                <Record Type="Common.SortOrderType">
+                                    <PropertyValue Property="Property" PropertyPath="invitedName"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Common.DraftNode">
+                    <Record Type="Common.DraftNodeType">
+                        <PropertyValue Property="PreparationAction" String="CatalogService.EntityContainer/ScheduleInvited_draftPrepare"/>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="CatalogService.ScheduleInvited/ID" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="CatalogService.ScheduleInvited/createdAt" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="Core.Immutable" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Common.Label" String="Created On"/>
+            </Annotations>
+            <Annotations Target="CatalogService.ScheduleInvited/createdBy" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="Core.Immutable" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Core.Description" String="User's unique ID"/>
+                <Annotation Term="Common.Label" String="Created By"/>
+            </Annotations>
+            <Annotations Target="CatalogService.ScheduleInvited/modifiedAt" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Common.Label" String="Changed On"/>
+            </Annotations>
+            <Annotations Target="CatalogService.ScheduleInvited/modifiedBy" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Core.Description" String="User's unique ID"/>
+                <Annotation Term="Common.Label" String="Changed By"/>
+            </Annotations>
+            <Annotations Target="CatalogService.ScheduleInvited/schedule" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Schedule"/>
+            </Annotations>
+            <Annotations Target="CatalogService.ScheduleInvited/schedule_ID" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Text" Path="schedule/opportunity/companyName">
+                    <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextOnly"/>
+                </Annotation>
+                <Annotation Term="Common.ValueListWithFixedValues" Bool="false"/>
+                <Annotation Term="Common.ValueList">
+                    <Record Type="Common.ValueListType">
+                        <PropertyValue Property="CollectionPath" String="Schedule"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="schedule_ID"/>
+                                    <PropertyValue Property="ValueListProperty" String="ID"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Common.Label" String="Schedule"/>
+            </Annotations>
+            <Annotations Target="CatalogService.ScheduleInvited/invitedName" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Invitee Name"/>
+                <Annotation Term="Core.Description" String="Invitee Name"/>
+            </Annotations>
+            <Annotations Target="CatalogService.ScheduleInvited/invitedEmail" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Communication.IsEmailAddress" Bool="true"/>
+                <Annotation Term="Common.Label" String="Invite Mail"/>
+                <Annotation Term="Core.Description" String="Invite Mail"/>
+            </Annotations>
+            <Annotations Target="CatalogService.ScheduleInvited/IsActiveEntity" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="CatalogService.ScheduleInvited/HasActiveEntity" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="CatalogService.ScheduleInvited/HasDraftEntity" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="CatalogService.ScheduleInvited/DraftAdministrativeData" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="CatalogService.ScheduleInvited/DraftAdministrativeData_DraftUUID" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="CatalogService.ScheduleDemo" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextOnly"/>
+                <Annotation Term="UI.LineItem">
+                    <Collection>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="demo_ID"/>
+                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="demo/demoDescription"/>
+                            <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/ReadOnly"/>
+                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/Low"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="demo/demoImage"/>
+                            <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/ReadOnly"/>
+                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/Medium"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="UI.PresentationVariant">
+                    <Record Type="UI.PresentationVariantType">
+                        <PropertyValue Property="SortOrder">
+                            <Collection>
+                                <Record Type="Common.SortOrderType">
+                                    <PropertyValue Property="Property" PropertyPath="demo_ID"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.HeaderInfo">
+                    <Record Type="UI.HeaderInfoType">
+                        <PropertyValue Property="Title">
+                            <Record Type="UI.DataField">
+                                <PropertyValue Property="Value" String="Scheduled Demo"/>
+                            </Record>
+                        </PropertyValue>
+                        <PropertyValue Property="TypeName" String="Scheduled Demo"/>
+                        <PropertyValue Property="TypeNamePlural" String="Scheduled Demos"/>
+                        <PropertyValue Property="Description">
+                            <Record Type="UI.DataField">
+                                <PropertyValue Property="Value" String="Scheduled Demo"/>
+                            </Record>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.FieldGroup" Qualifier="Details">
+                    <Record Type="UI.FieldGroupType">
+                        <PropertyValue Property="Data">
+                            <Collection>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="demo_ID"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="demo/demoName"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="demo/demoDescription"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="demo/demoImage"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.Facets">
+                    <Collection>
+                        <Record Type="UI.CollectionFacet">
+                            <PropertyValue Property="ID" String="CompaniesPrefecturesDetails"/>
+                            <PropertyValue Property="Label" String="Details"/>
+                            <PropertyValue Property="Facets">
+                                <Collection>
+                                    <Record Type="UI.ReferenceFacet">
+                                        <PropertyValue Property="Label" String="Details"/>
+                                        <PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#Details"/>
+                                    </Record>
+                                </Collection>
+                            </PropertyValue>
+                        </Record>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="CatalogService.EntityContainer/ScheduleDemo" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.PresentationVariant">
+                    <Record Type="UI.PresentationVariantType">
+                        <PropertyValue Property="SortOrder">
+                            <Collection>
+                                <Record Type="Common.SortOrderType">
+                                    <PropertyValue Property="Property" PropertyPath="demo_ID"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Common.DraftNode">
+                    <Record Type="Common.DraftNodeType">
+                        <PropertyValue Property="PreparationAction" String="CatalogService.EntityContainer/ScheduleDemo_draftPrepare"/>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="CatalogService.ScheduleDemo/ID" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="CatalogService.ScheduleDemo/schedule" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Schedule"/>
+            </Annotations>
+            <Annotations Target="CatalogService.ScheduleDemo/schedule_ID" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Text" Path="schedule/opportunity/companyName">
+                    <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextOnly"/>
+                </Annotation>
+                <Annotation Term="Common.ValueListWithFixedValues" Bool="false"/>
+                <Annotation Term="Common.ValueList">
+                    <Record Type="Common.ValueListType">
+                        <PropertyValue Property="CollectionPath" String="Schedule"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="schedule_ID"/>
+                                    <PropertyValue Property="ValueListProperty" String="ID"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Common.Label" String="Schedule"/>
+            </Annotations>
+            <Annotations Target="CatalogService.ScheduleDemo/demo" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Demo"/>
+            </Annotations>
+            <Annotations Target="CatalogService.ScheduleDemo/demo_ID" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Text" Path="demo/demoName">
+                    <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextOnly"/>
+                </Annotation>
+                <Annotation Term="Common.ValueListWithFixedValues" Bool="false"/>
+                <Annotation Term="Common.ValueList">
+                    <Record Type="Common.ValueListType">
+                        <PropertyValue Property="CollectionPath" String="Demo"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="demo_ID"/>
+                                    <PropertyValue Property="ValueListProperty" String="ID"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="demoImage"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="demoDescription"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Common.Label" String="Demo"/>
+            </Annotations>
+            <Annotations Target="CatalogService.ScheduleDemo/IsActiveEntity" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="CatalogService.ScheduleDemo/HasActiveEntity" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="CatalogService.ScheduleDemo/HasDraftEntity" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="CatalogService.ScheduleDemo/DraftAdministrativeData" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="CatalogService.ScheduleDemo/DraftAdministrativeData_DraftUUID" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="CatalogService.ScheduleCreate" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextOnly"/>
+                <Annotation Term="UI.Identification">
+                    <Collection>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="desiredDate"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="opportunity/companyName"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="Common.SemanticKey">
+                    <Collection>
+                        <PropertyPath>desiredDate</PropertyPath>
+                        <PropertyPath>opportunity/companyName</PropertyPath>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="Common.Label" String="Schedule"/>
+                <Annotation Term="Core.Description" Path="opportunity/companyName"/>
+            </Annotations>
+            <Annotations Target="CatalogService.ScheduleCreate/ID" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Core.Description" String="ID"/>
+                <Annotation Term="Common.Text" Path="opportunity/companyName">
+                    <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextOnly"/>
+                </Annotation>
+                <Annotation Term="Common.Label" String="ID"/>
+            </Annotations>
+            <Annotations Target="CatalogService.ScheduleCreate/createdAt" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="Core.Immutable" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Common.Label" String="Created On"/>
+            </Annotations>
+            <Annotations Target="CatalogService.ScheduleCreate/createdBy" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="Core.Immutable" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Core.Description" String="User's unique ID"/>
+                <Annotation Term="Common.Label" String="Created By"/>
+            </Annotations>
+            <Annotations Target="CatalogService.ScheduleCreate/modifiedAt" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Common.Label" String="Changed On"/>
+            </Annotations>
+            <Annotations Target="CatalogService.ScheduleCreate/modifiedBy" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Core.Description" String="User's unique ID"/>
+                <Annotation Term="Common.Label" String="Changed By"/>
+            </Annotations>
+            <Annotations Target="CatalogService.ScheduleCreate/opportunity" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Opportunity"/>
+                <Annotation Term="Core.Description" String="Opportunity"/>
+            </Annotations>
+            <Annotations Target="CatalogService.ScheduleCreate/opportunity_oppId" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+                <Annotation Term="Common.Text" Path="opportunity/oppId">
+                    <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextOnly"/>
+                </Annotation>
+                <Annotation Term="Common.ValueList">
+                    <Record Type="Common.ValueListType">
+                        <PropertyValue Property="CollectionPath" String="Opportunity"/>
+                        <PropertyValue Property="SearchSupported" Bool="true"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="opportunity_oppId"/>
+                                    <PropertyValue Property="ValueListProperty" String="oppId"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="companyName"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="oppDescription"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="oppPhase"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="quarter"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Common.Label" String="Opportunity"/>
+                <Annotation Term="Core.Description" String="Opportunity"/>
+            </Annotations>
+            <Annotations Target="CatalogService.ScheduleCreate/mainContact" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+                <Annotation Term="Common.Label" String="Main contact"/>
+                <Annotation Term="Core.Description" String="Main contact"/>
+            </Annotations>
+            <Annotations Target="CatalogService.ScheduleCreate/mail" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Communication.IsEmailAddress" Bool="true"/>
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+                <Annotation Term="Common.Label" String="Email"/>
+                <Annotation Term="Core.Description" String="Email"/>
+            </Annotations>
+            <Annotations Target="CatalogService.ScheduleCreate/phoneNumber" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Communication.IsPhoneNumber" Bool="true"/>
+                <Annotation Term="Common.Label" String="Phone Number"/>
+                <Annotation Term="Core.Description" String="Phone Number"/>
+            </Annotations>
+            <Annotations Target="CatalogService.ScheduleCreate/desiredDate" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+                <Annotation Term="Common.Label" String="Desired Date"/>
+                <Annotation Term="Core.Description" String="Desired Date"/>
+            </Annotations>
+            <Annotations Target="CatalogService.ScheduleCreate/invitedList" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Invited List"/>
+                <Annotation Term="Core.Description" String="Invited List"/>
+            </Annotations>
+            <Annotations Target="CatalogService.ScheduleCreate/demos" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Demos"/>
+                <Annotation Term="Core.Description" String="Demos"/>
+            </Annotations>
+            <Annotations Target="CatalogService.ScheduleCreate/scheduleObs" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Core.LongDescription" String="true"/>
+                <Annotation Term="Core.Description" String="What you expect to address during the tour"/>
+                <Annotation Term="UI.MultiLineText" Bool="true"/>
+                <Annotation Term="Common.Label" String="What you expect to address during the tour"/>
+            </Annotations>
+            <Annotations Target="CatalogService.ScheduleCreate/scheduleStatus" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Schedule status"/>
+                <Annotation Term="Core.Description" String="Schedule status"/>
+            </Annotations>
+            <Annotations Target="CatalogService.ScheduleCreate/scheduleStatus_scheduleStatus" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Text" Path="scheduleStatus/txtScheduleStatus">
+                    <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextOnly"/>
+                </Annotation>
+                <Annotation Term="Common.ValueList">
+                    <Record Type="Common.ValueListType">
+                        <PropertyValue Property="CollectionPath" String="ScheduleStatus"/>
+                        <PropertyValue Property="SearchSupported" Bool="true"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="scheduleStatus_scheduleStatus"/>
+                                    <PropertyValue Property="ValueListProperty" String="ID"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="txtScheduleStatus"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Common.Label" String="Schedule status"/>
+                <Annotation Term="Core.Description" String="Schedule status"/>
+            </Annotations>
+            <Annotations Target="CatalogService.ScheduleCreateInvited/schedule" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Schedule"/>
+            </Annotations>
+            <Annotations Target="CatalogService.ScheduleCreateInvited/schedule_ID" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Text" Path="schedule/opportunity/companyName">
+                    <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextOnly"/>
+                </Annotation>
+                <Annotation Term="Common.ValueListWithFixedValues" Bool="false"/>
+                <Annotation Term="Common.ValueList">
+                    <Record Type="Common.ValueListType">
+                        <PropertyValue Property="CollectionPath" String="Schedule"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="schedule_ID"/>
+                                    <PropertyValue Property="ValueListProperty" String="ID"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Common.Label" String="Schedule"/>
+            </Annotations>
+            <Annotations Target="CatalogService.ScheduleCreateDemo/ID" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="CatalogService.ScheduleCreateDemo/schedule" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Schedule"/>
+            </Annotations>
+            <Annotations Target="CatalogService.ScheduleCreateDemo/schedule_ID" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Text" Path="schedule/opportunity/companyName">
+                    <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextOnly"/>
+                </Annotation>
+                <Annotation Term="Common.ValueListWithFixedValues" Bool="false"/>
+                <Annotation Term="Common.ValueList">
+                    <Record Type="Common.ValueListType">
+                        <PropertyValue Property="CollectionPath" String="Schedule"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="schedule_ID"/>
+                                    <PropertyValue Property="ValueListProperty" String="ID"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Common.Label" String="Schedule"/>
+            </Annotations>
+            <Annotations Target="CatalogService.ScheduleCreateDemo/demo" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Demo"/>
+            </Annotations>
+            <Annotations Target="CatalogService.ScheduleCreateDemo/demo_ID" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Text" Path="demo/demoName">
+                    <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextOnly"/>
+                </Annotation>
+                <Annotation Term="Common.ValueListWithFixedValues" Bool="false"/>
+                <Annotation Term="Common.ValueList">
+                    <Record Type="Common.ValueListType">
+                        <PropertyValue Property="CollectionPath" String="Demo"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="demo_ID"/>
+                                    <PropertyValue Property="ValueListProperty" String="ID"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="demoImage"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="demoDescription"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Common.Label" String="Demo"/>
+            </Annotations>
+            <Annotations Target="CatalogService.DemoCreate" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextOnly"/>
+                <Annotation Term="UI.Identification">
+                    <Collection>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="demoName"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="Common.SemanticKey">
+                    <Collection>
+                        <PropertyPath>demoName</PropertyPath>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="Common.Label" String="Demo"/>
+                <Annotation Term="Core.Description" Path="demoName"/>
+                <Annotation Term="Core.MediaType" String="image/png"/>
+            </Annotations>
+            <Annotations Target="CatalogService.DemoCreate/ID" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Common.Text" Path="demoName">
+                    <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextOnly"/>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="CatalogService.DemoCreate/createdAt" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="Core.Immutable" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Common.Label" String="Created On"/>
+            </Annotations>
+            <Annotations Target="CatalogService.DemoCreate/createdBy" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="Core.Immutable" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Core.Description" String="User's unique ID"/>
+                <Annotation Term="Common.Label" String="Created By"/>
+            </Annotations>
+            <Annotations Target="CatalogService.DemoCreate/modifiedAt" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Common.Label" String="Changed On"/>
+            </Annotations>
+            <Annotations Target="CatalogService.DemoCreate/modifiedBy" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Core.Description" String="User's unique ID"/>
+                <Annotation Term="Common.Label" String="Changed By"/>
+            </Annotations>
+            <Annotations Target="CatalogService.DemoCreate/demoName" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+                <Annotation Term="Common.TextFor" PropertyPath="ID"/>
+                <Annotation Term="Common.Label" String="Demo name"/>
+                <Annotation Term="Core.Description" String="Demo name"/>
+            </Annotations>
+            <Annotations Target="CatalogService.DemoCreate/demoDescription" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Core.Description" String="true"/>
+                <Annotation Term="UI.MultiLineText" Bool="true"/>
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+                <Annotation Term="Common.Label" String="Demo Description"/>
+            </Annotations>
+            <Annotations Target="CatalogService.DemoCreate/demoExperience" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Demo Experience"/>
+                <Annotation Term="Core.Description" String="Demo Experience"/>
+            </Annotations>
+            <Annotations Target="CatalogService.DemoCreate/demoObs" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Core.LongDescription" String="true"/>
+                <Annotation Term="Core.Description" String="Demo Obs."/>
+                <Annotation Term="Common.Label" String="Demo Obs."/>
+            </Annotations>
+            <Annotations Target="CatalogService.DemoCreate/demoStatus" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Demo Status"/>
+                <Annotation Term="Core.Description" String="Demo Status"/>
+            </Annotations>
+            <Annotations Target="CatalogService.DemoCreate/demoImage" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Image"/>
+                <Annotation Term="Core.Description" String="Image"/>
+            </Annotations>
+            <Annotations Target="CatalogService.DemoCreate/videoURLEN" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Video URL EN"/>
+                <Annotation Term="Core.Description" String="Video URL EN"/>
+            </Annotations>
+            <Annotations Target="CatalogService.DemoCreate/videoURLPT" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Video URL PT"/>
+                <Annotation Term="Core.Description" String="Video URL PT"/>
+            </Annotations>
+            <Annotations Target="CatalogService.DraftAdministrativeData" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Draft Administrative Data"/>
+            </Annotations>
+            <Annotations Target="CatalogService.DraftAdministrativeData/DraftUUID" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+                <Annotation Term="Common.Label" String="Draft (Technical ID)"/>
+            </Annotations>
+            <Annotations Target="CatalogService.DraftAdministrativeData/CreationDateTime" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Draft Created On"/>
+            </Annotations>
+            <Annotations Target="CatalogService.DraftAdministrativeData/CreatedByUser" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Draft Created By"/>
+            </Annotations>
+            <Annotations Target="CatalogService.DraftAdministrativeData/DraftIsCreatedByMe" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+                <Annotation Term="Common.Label" String="Draft Created By Me"/>
+            </Annotations>
+            <Annotations Target="CatalogService.DraftAdministrativeData/LastChangeDateTime" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Draft Last Changed On"/>
+            </Annotations>
+            <Annotations Target="CatalogService.DraftAdministrativeData/LastChangedByUser" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Draft Last Changed By"/>
+            </Annotations>
+            <Annotations Target="CatalogService.DraftAdministrativeData/InProcessByUser" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Draft In Process By"/>
+            </Annotations>
+            <Annotations Target="CatalogService.DraftAdministrativeData/DraftIsProcessedByMe" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+                <Annotation Term="Common.Label" String="Draft In Process By Me"/>
+            </Annotations>
+            <Annotations Target="CatalogService.ScheduleStatus_texts/scheduleStatus" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Text" Path="txtScheduleStatus">
+                    <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextOnly"/>
+                </Annotation>
+                <Annotation Term="Common.Label" String="Schedule status"/>
+                <Annotation Term="Core.Description" String="Schedule status"/>
+            </Annotations>
+            <Annotations Target="CatalogService.ScheduleStatus_texts/txtScheduleStatus" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+                <Annotation Term="Common.TextFor" PropertyPath="scheduleStatus"/>
+                <Annotation Term="Common.Label" String="Schedule status"/>
+                <Annotation Term="Core.Description" String="Schedule status"/>
+            </Annotations>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

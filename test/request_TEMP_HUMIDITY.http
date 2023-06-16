@@ -1,0 +1,28 @@
+@server = http://localhost:4004
+@me = Authorization: Basic {{$processEnv USER}}:
+@basic = Authorization: Basic admin:admin
+
+
+### ------------------------------------------------------------------------
+### ------------------------------------------------------------------------
+### -------------------------------CATALOG----------------------------------
+### ------------------------------------------------------------------------
+### ------------------------------------------------------------------------
+
+
+### ACTION - Read temperature
+POST {{server}}/catalog/readTemp
+Accept: application/json
+Content-Type: application/json
+{{basic}}
+
+
+
+### ACTION - Read humidity
+POST {{server}}/catalog/readHumidity
+Accept: application/json
+Content-Type: application/json
+{{basic}}
+
+
+
