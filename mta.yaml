@@ -2,8 +2,15 @@ _schema-version: "3.1"
 ID: capeventbp
 description: SAP Experience Sao Paulo
 version: 1.0.1
+# ----------------------------------------------------------------
+# ----------------------------------------------------------------
+# ----------------------------MODULES-----------------------------
+# ----------------------------------------------------------------
+# ----------------------------------------------------------------
 modules:
+# -------------------- UI DEPLOYER MODULE ------------------------ 
 - name: capeventbp-ui-deployer
+# ----------------------------------------------------------------
   type: com.sap.application.content
   path: .
   requires:
@@ -17,7 +24,9 @@ modules:
       - capeventbpappeventlog.zip
       name: capeventbpappeventlog
       target-path: resources/
+# ------------------------ HTML5 Content -------------------------      
 - name: capeventbp-destination-content
+# ----------------------------------------------------------------
   type: com.sap.application.content
   path: .
   requires:
@@ -48,7 +57,9 @@ modules:
         existing_destinations_policy: update
   build-parameters:
     no-source: true
+# --------------------- CAP SERVER MODULE ------------------------    
 - name: capeventbp-srv
+# ----------------------------------------------------------------
   type: nodejs
   path: gen/srv
   properties:
@@ -69,7 +80,9 @@ modules:
     buildpack: nodejs_buildpack
     disk-quota: 1024M
     memory: 512M
+# -------------- SIDECAR MODULE - DB DEPLOYER-----------------     
 - name: capeventbp-db-deployer
+# ------------------------------------------------------------
   type: hdb
   path: gen/db
   requires:
@@ -77,7 +90,9 @@ modules:
   - name: capeventbp-xsuaa-service
   parameters:
     buildpack: nodejs_buildpack
+# ---------------------- HTML5 MODULE ------------------------     
 - name: capeventbpappeventlog
+# ------------------------------------------------------------
   type: html5
   path: app/eventlog
   build-parameters:
@@ -87,7 +102,15 @@ modules:
     - npm install
     - npm run build:cf
     supported-platforms: []
+
+
+# ----------------------------------------------------------------
+# ----------------------------------------------------------------
+# ---------------------------RESOURCES----------------------------
+# ----------------------------------------------------------------
+# ----------------------------------------------------------------    
 resources:
+# --------------------- DB - HDI CONTAINER------------------------
 - name: capeventbp-db
   type: com.sap.xs.hdi-container
   parameters:
@@ -95,11 +118,14 @@ resources:
     service-plan: hdi-shared
   properties:
     hdi-service-name: ${service-name}
+
+# ----------------- Destination Service -------------------       
 - name: capeventbp-destination-service
+# -----------------------------------------------------------------
   type: org.cloudfoundry.managed-service
   parameters:
     config:
-      HTML5Runtime_enabled: true
+      ##HTML5Runtime_enabled: true
       init_data:
         instance:
           destinations:
@@ -108,13 +134,28 @@ resources:
             ProxyType: Internet
             Type: HTTP
             URL: https://ui5.sap.com
+          existing_destinations_policy: update
+        subaccount:
+          destinations:
           - Authentication: NoAuthentication
+            Description: CAP EVENT BP Destination
             HTML5.DynamicDestination: true
             HTML5.ForwardAuthToken: true
-            Name: capeventbp-srv-api
+            HTML5.Timeout: 300000
+            Name: capeventbp
             ProxyType: Internet
             Type: HTTP
             URL: ~{srv-api/srv-url}
+          - Authentication: NoAuthentication
+            Description: CAP EVENT BP Catalog Service
+            HTML5.DynamicDestination: true
+            HTML5.ForwardAuthToken: true
+            HTML5.Timeout: 300000
+            sap.processautomation.enabled: true
+            Name: capeventbp_catalog
+            ProxyType: Internet
+            Type: HTTP
+            URL: ~{srv-api/srv-url}/catalog             
           existing_destinations_policy: update
       version: 1.0.0
     service: destination
@@ -122,7 +163,10 @@ resources:
     service-plan: lite
   requires:
   - name: srv-api
+
+# -------------------------- HTML5 Host ---------------------------  
 - name: capeventbp-html5-host
+# -----------------------------------------------------------------
   type: org.cloudfoundry.managed-service
   parameters:
     config:
@@ -130,19 +174,30 @@ resources:
     service: html5-apps-repo
     service-name: capeventbp-html5-host-service
     service-plan: app-host
+
+# ------------------------ XSUAA Service -----------=--------------      
 - name: capeventbp-xsuaa-service
+# -----------------------------------------------------------------
   type: org.cloudfoundry.managed-service
   parameters:
     path: ./xs-security.json
     service: xsuaa
     service-name: capeventbp-xsuaa-service
     service-plan: application
+
+# --------------------- Process Automation ------------------------      
 - name: sap_processautomation
+# -----------------------------------------------------------------
   type: org.cloudfoundry.existing-service
+
+# -------------------------- Event Mesh ---------------------------  
 - name: eventmesh_sappsbr
+# -----------------------------------------------------------------
   type: org.cloudfoundry.existing-service
+
+
 parameters:
-  deploy_mode: html5-repo
+  ###deploy_mode: html5-repo
   enable-parallel-deployments: true
 build-parameters:
   before-all:

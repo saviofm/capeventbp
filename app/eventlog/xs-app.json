@@ -5,7 +5,7 @@
     {
       "source": "^/catalog/(.*)$",
       "target": "/catalog/$1",
-      "destination": "capeventbp-srv-api",
+      "destination": "capeventbp",
       "authenticationType": "xsuaa",
       "csrfProtection": false
     },
