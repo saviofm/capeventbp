@@ -37,10 +37,14 @@
                     "action": "CREATED",
                     "title": "{{flpTitle}}",
                     "subTitle": "{{flpSubtitle}}",
-                    "icon": ""
+                    "icon": "sap-icon://SAP-icons-TNT/start-event"
                 }
             }
         }
+    },
+    "sap.cloud": {
+        "service": "capeventbp",
+        "public": true
     },
     "sap.ui": {
         "technology": "UI5",

@@ -43,38 +43,32 @@ module.exports = cds.service.impl ( async function(){
                     houseNum: msg.data.BUT000[0].ADRC[0].HOUSE_NUM1, 
                     city: msg.data.BUT000[0].ADRC[0].CITY1, 
                     region: msg.data.BUT000[0].ADRC[0].REGION, 
-                    country: msg.data.BUT000[0].ADRC[0].COUNTY_CODE, 
+                    country: msg.data.BUT000[0].ADRC[0].COUNTRY, 
                     postalCode: msg.data.BUT000[0].ADRC[0].POST_CODE1, 
                 }).into(eventBPCreated);
            
             console.log(`EVENT BP Created occurs`);
             
-            /*
-                //Preenche o contexto  
-                let t = new Date(msg.data.timestamp);  
-                let hr = ("0" + t.getHours()).slice(-2);
-                let min = ("0" + t.getMinutes()).slice(-2);
-                let sec = ("0" + t.getSeconds()).slice(-2);
-                let date = ("0" + t.getDate()).slice(-2);
-                let month = (t.getMonth()+1)
-                month = ("0" + month).slice(-2);
-
-                let time =date+ "/" + month + "/" + t.getFullYear() + " "+hr+":"+min+":"+sec
-                let body = {
-                    definitionId: "us10.sap-presales-br-usa.avisodeiluminaoiot.avisoIluminacaoIOT",
-                    context: {
-                        dataRegistro: time,
-                        valorRegistrado: msg.data.lux
-                    }
+            let body = {
+                "definitionId": "us10.sap-presales-br-usa.avisocriaodebpeventmesh.avisoCriacaoBusinessPartnerEventMesh",
+                "context": {
+                    "partner": msg.data.BUT000[0].PARTNER, 
+                    "fullname": msg.data.BUT000[0].NAME1_TEXT, 
+                    "street": msg.data.BUT000[0].ADRC[0].STREET, 
+                    "housenum": msg.data.BUT000[0].ADRC[0].HOUSE_NUM1, 
+                    "region": msg.data.BUT000[0].ADRC[0].REGION, 
+                    "city": msg.data.BUT000[0].ADRC[0].CITY1, 
+                    "country": msg.data.BUT000[0].ADRC[0].COUNTRY, 
+                    "postalcode": msg.data.BUT000[0].ADRC[0].POST_CODE1
                 }
+            }
               
             const response = await workflowPOST('sap_processautomation', '/workflow/rest/v1/workflow-instances', null, JSON.stringify(body));
 
             //response.ID 
             console.log(response);
         
-            }
-            */
+           
             });
         ////return super.init();
 })
