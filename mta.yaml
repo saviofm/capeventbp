@@ -119,9 +119,9 @@ resources:
   properties:
     hdi-service-name: ${service-name}
 
-# ----------------- Destination Service -------------------       
+# --------------------- Destination Service ----------------------       
 - name: capeventbp-destination-service
-# -----------------------------------------------------------------
+# ----------------------------------------------------------------
   type: org.cloudfoundry.managed-service
   parameters:
     config:
@@ -175,7 +175,7 @@ resources:
     service-name: capeventbp-html5-host-service
     service-plan: app-host
 
-# ------------------------ XSUAA Service -----------=--------------      
+# ------------------------ XSUAA Service --------------------------      
 - name: capeventbp-xsuaa-service
 # -----------------------------------------------------------------
   type: org.cloudfoundry.managed-service
